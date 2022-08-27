@@ -1,0 +1,85 @@
+<!-- 搜索工具栏 -->
+<view wx:if="{{index=='0'}}" class="weui-search-bar {{inputShowed ? 'weui-search-bar_focusing' : ''}}">
+  <form class="weui-search-bar__form">
+    <view class="weui-search-bar__box">
+      <i class="weui-icon-search"></i>
+      <input type="text" class="weui-search-bar__input" placeholder="搜索" value="{{inputVal}}" focus="{{inputShowed}}" bindinput="inputTyping" />
+      <view class="search_num">{{searchIndex}}/{{searchTotal}}</view>
+    </view>
+    <label class="weui-search-bar__label" bindtap="showInput">
+      <i class="weui-icon-search"></i>
+      <span class="weui-search-bar__text">搜索</span>
+    </label>
+  </form>
+  <view class="search_triangle" data-type="prev" bindtap="searchMove" />
+  <view class="search_triangle" style="transform:rotate(180deg)" data-type="next" bindtap="searchMove" />
+  <view class="weui-search-bar__cancel-btn" bindtap="hideInput">取消</view>
+</view>
+<!-- 编辑工具栏 -->
+<view wx:else class="editor_toolbox">
+  <view style="display: flex;">
+    <i class="iconfont icon-undo" data-method="undo" bindtap="edit" />
+    <i class="iconfont icon-redo" data-method="redo" bindtap="edit" />
+    <i class="iconfont icon-img" data-method="insertImg" bindtap="edit" />
+    <i class="iconfont icon-video" data-method="insertVideo" bindtap="edit" />
+    <i class="iconfont icon-link" data-method="insertLink" bindtap="edit" />
+    <i class="iconfont icon-text" data-method="insertText" bindtap="edit" />
+    <i class="iconfont icon-line" data-method="insertHtml" data-param="<hr style='margin:10px 0'/>" bindtap="edit" />
+    <i class="iconfont icon-heading" bindtap="insertHead" />
+  </view>
+  <view style="display: flex;">
+    <i class="iconfont icon-quote" data-method="insertHtml" data-param="<blockquote style='padding:0 1em;color:#6a737d;border-left:.25em solid #dfe2e5'>引用</blockquote>" bindtap="edit" />
+    <i class="iconfont icon-table" bindtap="insertTable" />
+    <i class="iconfont icon-code" bindtap="insertCode" />
+    <i class="iconfont icon-emoji" data-type="emoji" bindtap="openDialog" />
+    <i class="iconfont icon-template" data-type="template" bindtap="openDialog" />
+    <i class="iconfont icon-clear" bindtap="clear" />
+    <i class="iconfont icon-load" bindtap="load" />
+    <i class="iconfont icon-{{editable?'save':'edit'}}" bindtap="save" />
+  </view>
+</view>
+<!-- 富文本内容 -->
+<view style="padding-top:{{index=='0'?'50':'90'}}px">
+  <mp-html id="article" container-style="padding:20px;{{editable?'min-height:calc(100vh - 130px)':''}}" lazy-load content="{{content}}" domain="https://mp-html.oss-cn-hangzhou.aliyuncs.com" editable="{{editable}}" scroll-table selectable="force" tag-style="{{tagStyle}}" use-anchor="{{index=='0'?-50:true}}">{{index=='0'?'拼命加载中...':''}}</mp-html>
+</view>
+<!-- 模态框 -->
+<view class="fadeIn" wx:if="{{modal}}">
+  <view class="weui-mask"></view>
+  <view class="weui-dialog">
+    <view class="weui-dialog__hd"><strong class="weui-dialog__title">{{modal.title}}</strong></view>
+    <view class="weui-dialog__bd">
+      <block wx:if="{{modal.title=='插入表格'}}">
+        <picker class="modal_picker" range="{{[1,2,3,4,5,6,7,8,9]}}" data-type="rows" bindchange="pickerChange">{{rows}}</picker>行
+        <picker class="modal_picker" range="{{[1,2,3,4,5]}}" data-type="cols" bindchange="pickerChange">{{cols}}</picker>列
+      </block>
+      <input wx:else class="modal_input" value="{{modal.value}}" maxlength="-1" auto-focus bindinput="modalInput" />
+    </view>
+    <view class="weui-dialog__ft">
+      <a class="weui-dialog__btn weui-dialog__btn_default" bindtap="modalCancel">取消</a>
+      <a class="weui-dialog__btn weui-dialog__btn_primary" bindtap="modalConfirm">确定</a>
+    </view>
+  </view>
+</view>
+<!-- 底部弹窗 -->
+<view class="fadeIn" wx:if="dialog" wx:if="{{dialog}}">
+  <view class="weui-mask" bindtap="closeDialog"></view>
+  <view class="weui-half-screen-dialog">
+    <view class="weui-half-screen-dialog__hd">
+      <view class="weui-half-screen-dialog__hd__side" bindtap="closeDialog">
+        <a class="weui-icon-btn">关闭<i class="weui-icon-close-thin"></i></a>
+      </view>
+      <view class="weui-half-screen-dialog__hd__main">
+        <strong class="weui-half-screen-dialog__title">插入{{dialog=='emoji'?'表情':'模板'}}</strong>
+      </view>
+    </view>
+    <view class="weui-half-screen-dialog__bd" style="height:{{dialog=='emoji'?'105':'150'}}px; padding-bottom: 30px;">
+      <view wx:if="{{dialog=='emoji'}}" wx:for="{{emojis}}" wx:for-item="line" wx:key="index" style="display: flex; font-size: 20px; line-height: 35px">
+        <view style="flex:1" wx:for="{{line}}" wx:key="index" data-emoji="{{item}}" bindtap="insertEmoji">{{item}}</view>
+      </view>
+      <view wx:if="{{dialog=='template'}}" wx:for="{{templates}}" wx:key="index" bindtap="closeDialog">
+        <rich-text nodes="{{item}}" data-method="insertHtml" data-param="{{item}}" bindtap="edit" />
+        <view style="border-top:1px dashed gray; width: 80%; height: 0; margin: 20px auto" />
+      </view>
+    </view>
+  </view>
+</view>

@@ -1,0 +1,18 @@
+{
+  "pages": [
+    "pages/index/index",
+    "pages/docs/docs",
+    "pages/demo/demo",
+    "pages/test/test"
+  ],
+  "window": {
+    "navigationBarTextStyle": "black",
+    "navigationBarTitleText": "富文本组件",
+    "navigationBarBackgroundColor": "#EDEDED",
+    "backgroundColor": "#EDEDED"
+  },
+  "lazyCodeLoading": "requiredComponents",
+  "useExtendedLib": {},
+  "style": "v2",
+  "sitemapLocation": "sitemap.json"
+}

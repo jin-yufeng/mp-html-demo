@@ -1,0 +1,11 @@
+.link-hover {
+  opacity: 0.5;
+}
+
+.editor {
+  height: 200px;
+  padding: 10px;
+  font-family: monospace;
+  background-color: white;
+  caret-color: #ccc;
+}

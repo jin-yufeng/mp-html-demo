@@ -1,0 +1,22 @@
+<view class="page">
+  <view class="page__hd">
+    <view class="page__title">自定义测试</view>
+    <view class="page__desc">您可以输入内容进行测试</view>
+  </view>
+  <view class="page__bd">
+    <view class="weui-cells__title">渲染结果</view>
+    <view class="weui-cells" style="padding:10px">
+      <mp-html content="{{content}}" markdown="{{markdown}}" use-anchor="{{markdown}}" />
+    </view>
+    <view class="weui-cells__title">输入字符
+      <view class="weui-link" hover-class="link-hover" style="float:right" bindtap="loadFile">文件读取</view>
+    </view>
+    <editor wx:if="{{canIUse}}" id="editor" class="editor" placeholder="请输入 {{markdown?'markdown':'html'}} 内容" />
+    <textarea wx:else class="editor" placeholder="请输入 {{markdown?'markdown':'html'}} 内容" value="{{value}}" maxlength="-1"
+      bindinput="input"></textarea>
+    <view class="weui-btn-area">
+      <button class="weui-btn weui-btn_primary" bindtap="render">渲染</button>
+      <button class="weui-btn weui-btn_default" bindtap="clear">清空</button>
+    </view>
+  </view>
+</view>
