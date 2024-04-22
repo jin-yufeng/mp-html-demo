@@ -61,7 +61,7 @@
   </view>
 </view>
 <!-- 底部弹窗 -->
-<view class="fadeIn" wx:if="dialog" wx:if="{{dialog}}">
+<view class="fadeIn" wx:if="{{dialog}}">
   <view class="weui-mask" bindtap="closeDialog"></view>
   <view class="weui-half-screen-dialog">
     <view class="weui-half-screen-dialog__hd">

@@ -243,6 +243,7 @@ module.exports = [
 | style | 匹配 style 标签中的样式 |
 | txv-video | 使用腾讯视频 |
 | latex | 渲染 latex 公式 [体验](/pages/demo/demo?index=0&id=latex) |
+| card | 卡片展示 |
 
 查看 [插件](https://jin-yufeng.gitee.io/mp-html/#/advanced/plugin) 了解更多
 
@@ -252,6 +253,36 @@ module.exports = [
   <a href="2">下一章：更新日志</a>
 </div>`, 
 `## 更新日志
+- \`v2.5.0\`
+  1. \`U\` \`play\` 事件增加返回 \`src\` 等信息
+  2. \`U\` \`preview-img\` 属性支持设置为 \`all\` 开启 \`base64\` 图片预览
+  3. \`U\` \`editable\` 插件增加简易模式（点击文字直接编辑）
+  4. \`U\` \`latex\` 插件支持块级公式
+  5. \`F\` 修复了表格部分情况下背景丢失的问题
+  6. \`F\` 修复了部分 \`svg\` 无法显示的问题
+  7. \`F\` 修复了 \`latex\` 插件部分情况下显示不正确的问题
+  8. \`F\` 修复了 \`editable\` 插件表格无法删除的问题
+
+- \`v2.4.3\`
+  1. \`A\` 增加 \`card\` 插件
+  2. \`F\` 修复了 \`svg\` 中包含 \`foreignobject\` 可能不显示的问题
+  3. \`F\` 修复了合并单元格的表格部分情况下显示不正确的问题
+  4. \`F\` 修复了 \`img\` 标签设置 \`object-fit\` 无效的问题
+  5. \`F\` 修复了 \`latex\` 插件公式会换行的问题
+
+- \`v2.4.2\`
+  1. \`A\` \`editable\` 插件支持修改文字颜色
+  2. \`F\` 修复了 \`svg\` 中有 \`style\` 不生效的问题
+  3. \`F\` 修复了 \`editable\` 插件在点击换图时未拼接 \`domain\` 的问题
+  4. \`F\` 修复了 \`latex\` 插件部分情况下不显示的问题
+  5. \`F\` 修复了 \`editable\` 插件点击音视频时其他标签框不消失的问题
+
+- \`v2.4.1\`
+  1. \`F\` 修复了没有图片时 \`ready\` 事件可能不触发的问题
+  2. \`F\` 修复了加载过程中可能出现 \`Root label not found\` 错误的问题
+  3. \`F\` 修复了 \`audio\` 插件退出页面可能会报错的问题
+  4. \`F\` 修复了链接内有图片时可能错误换行的问题
+
 - \`v2.4.0\`
   1. \`A\` 增加了 \`setPlaybackRate\` 的 \`api\`，可以设置音视频的播放速率
   2. \`A\` 示例小程序代码开源 [详细](https://github.com/jin-yufeng/mp-html-demo)
@@ -405,7 +436,9 @@ module.exports = [
 </div>`,
 `## 联系我们  
 邮箱：[mp_html@126.com](copy:mp_html@126.com)  
-\`QQ\` 交流群：[699734691](copy:699734691)  
+\`QQ\` 交流群1（已满）：[699734691](copy:699734691)  
+\`QQ\` 交流群2（已满）：[778239129](copy:778239129)  
+\`QQ\` 交流群3：[960265313](copy:960265313)  
 ## 相关链接  
 官网文档：https://jin-yufeng.gitee.io/mp-html  
 \`github\`：https://github.com/jin-yufeng/mp-html  

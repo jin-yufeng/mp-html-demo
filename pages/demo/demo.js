@@ -30,6 +30,19 @@ Page({
     // 获取组件实例
     this.ctx = this.selectComponent('#article')
     if (e.index === '1') {
+      wx.showActionSheet({
+        itemList: ['简易模式', '正常模式'],
+        success: e => {
+          if (e.tapIndex === 0) {
+            this._editmode = 'simple'
+            this.setData({
+              editable: 'simple'
+            })
+          } else {
+            this._editmode = true
+          }
+        }
+      })
       // 开启编辑
       data.editable = true
       // 设置离开页面提示
@@ -298,9 +311,7 @@ Page({
   save() {
     // 延时避免当前编辑内容没有保存
     setTimeout(() => {
-      const data = {
-        editable: !this.data.editable
-      }
+      const data = {}
       if (this.data.editable) {
         // 保存编辑好的内容
         data.content = this.ctx.getContent()
@@ -313,11 +324,13 @@ Page({
         })
         // 取消离开页面提示
         wx.disableAlertBeforeUnload && wx.disableAlertBeforeUnload()
+        data.editable = false
       } else {
         // 添加离开页面提示
         wx.enableAlertBeforeUnload && wx.enableAlertBeforeUnload({
           message: '离开页面将不会保留未保存的内容，确定离开吗？'
         })
+        data.editable = this._editmode
       }
       this.setData(data)
     }, 50)
